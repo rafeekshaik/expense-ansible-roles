@@ -1,3 +1,5 @@
 mysql_login_user: root
 mysql_login_password: ExpenseApp@1
 mysql_host: mysql.daws17s.online
+APP_LOCATION: /app
+COMPONENT: backend
