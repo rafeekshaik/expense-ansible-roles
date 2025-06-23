@@ -7,27 +7,30 @@
     name: nginx
     state: started
     enabled: yes
-
-- name: remove html directory
-  ansible.builtin.file:
-    path: /usr/share/nginx/html
-    state: absent
+- name: include the common rule
+  include_role:
+      name: common
+      tasks_from: main
+# - name: remove html directory
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: absent
   
 
-- name: creating html directory
-  ansible.builtin.file:
-      path: /usr/share/nginx/html
-      state: directory
-- name: doenload the app code
-  ansible.builtin.get_url:
-      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
-      dest: /tmp/frontend.zip
+# - name: creating html directory
+#   ansible.builtin.file:
+#       path: /usr/share/nginx/html
+#       state: directory
+# - name: doenload the app code
+#   ansible.builtin.get_url:
+#       url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+#       dest: /tmp/frontend.zip
 
-- name: unarchive the code   
-  ansible.builtin.unarchive:
-      src: /tmp/frontend.zip
-      dest: /usr/share/nginx/html
-      remote_src: yes
+# - name: unarchive the code   
+#   ansible.builtin.unarchive:
+#       src: /tmp/frontend.zip
+#       dest: /usr/share/nginx/html
+#       remote_src: yes
 
 - name: copying the expenseconf file
   ansible.builtin.template:
